@@ -19,11 +19,11 @@ style: |
       font-weight: bold;
       color: green
     }
+    a:visited {
+      color: black
+    }
     section.center_h3 h3 {
       text-align: center;
-    }
-    section.slide_form {
-
     }
 ---
 ![bg left:40% 80%](./img/marp_logo.png)
@@ -207,7 +207,13 @@ header: ""
 footer: ""
 paginate: true
 -->
-
+<style scoped>
+section::after {
+  color: darkred;
+  font-weight: bold;
+  font-size: 2rem;
+}
+</style>
 ### Pagination
 
 Just like header and footer, page numbers are available as a local/spot directive:
@@ -246,7 +252,7 @@ a {
 }  
 -->
 
-Markdown and <a href="https://marp.app/"> HTML syntax links </a> work too*
+Markdown and <a href="https://marp.app/"> HTML syntax links </a> work too.
 
 [named-link]: #pagination
 
@@ -255,6 +261,7 @@ Markdown and <a href="https://marp.app/"> HTML syntax links </a> work too*
 
 - [Slide](#slide-styles)
 - [Text](#text-styles)
+- [Code block](#code-block-styles)
 
 ---
 <!--
@@ -271,7 +278,7 @@ a:visited {
 }
 </style>
 
-Style of this slide is changed with spot directives.
+Style of this slide is changed with spot directives and some CSS.
 ```html
 <!--
 _backgroundColor: black
@@ -287,13 +294,13 @@ Other background directives:
 <div class="columns">
 <div>
 
-* backgroundImage ([w3scools link][background-image])
-* backgroundPosition ([w3scools link][background-position])
+* backgroundImage ([css explanation][background-image])
+* backgroundPosition ([css explanation][background-position])
 </div>
 <div>
 
-* backgroundRepeat ([w3scools link][background-repeat])
-* backgroundSize ([w3scools link][background-size])
+* backgroundRepeat ([css explanation][background-repeat])
+* backgroundSize ([css explanation][background-size])
 </div>
 </div>
 
@@ -309,16 +316,35 @@ List defined with hyphen comes up at once. Defined with asterics is revealed ste
 
 ---
 <!--
-_class: center_h3
+_class: slide_styles
 -->
+<style>
+    section.slide_styles h3 {
+      text-align: center;
+    }
+    section.slide_styles h4 {
+      text-align: right;
+      padding-right: 120px;
+
+    }
+    section.slide_styles p {
+      text-align: left;
+      border: 2px solid purple;
+      border-radius: 20px;
+      padding-top: 50px;
+      padding-right: 30px;
+      padding-bottom: 50px;
+      padding-left: 80px;
+    }
+</style>
+
 ### Slide styles
 
-#### H4
+#### Directive 'class' usage
 
-Slide layout can also be modified with the help of CSS.
-CSS 
+More experienced with CSS can fully restructure the layout of a slide with the help of `class` directive. It points to CSS definitions inside `style` global directive or `<style>` tag.
 
-
+With HTML tags enabled and using `<div class="style_name">` it is fairly easy to create Your own layout for the slide as it was done in the previous slide with 2 columns.
 
 ---
 ### Scoped CSS
@@ -339,9 +365,72 @@ pre {
 
 ---
 <!--
+_header: "Modified header style<br/> spanning muliple lines"
+_footer: "Now this is seen better"
+ -->
+### Footer/header styles
+<style scoped>
+section {
+  padding: 50px;
+}
+
+header,
+footer {
+  position: absolute;
+  left: 50px;
+  right: 50px;
+  height: 20px;
+}
+
+header {
+  top: 30px;
+  font-size: 1rem;
+  text-align: center;
+  font-family: "Courier New"
+}
+
+footer {
+  bottom: 30px;
+  font-size: 1rem;
+  padding-left: 200px;
+  color: black;
+  font-weight: bold;
+}
+
+</style>
+Also can easily be modified with some CSS.
+
+
+---
+<style scoped>
+li {
+  font-family: "Courier New"
+}
+</style>
+### Text styles
+
+A few options:
+- __Markdown__ _native_ [features](https://www.markdownguide.org/basic-syntax/).
+- Slide (deck) level CSS changes.
+```html
+<style scoped>
+li {
+  font-family: "Courier New"
+}
+</style>
+```
+- Inline <b>HTML</b> and/or <span style="color:white; background-color: black">CSS</span> features.
+```html
+- Inline <b>HTML</b> and/or <span style="color:white; background-color: black">CSS</span> features.
+```
+
+
+
+---
+<!--
 _footer: "Registered languages: [Marp-core hilightjs instance](https://github.com/marp-team/marp-core/blob/main/src/highlightjs.ts)"
 -->
-### Text styles
+### Code block styles
 
 - Code block syntax highlighting (uses highlight.js)
 > All previous code snippets are highlited as HTML comments using **```html** at the begining of the code block
@@ -353,6 +442,28 @@ A python highlighting example:
 [1, 2, 3, 4, 5, 6, 7]
 >>> [a**2 for a in l if a%2 == 0]
 [4, 16, 36]
+```
+
+---
+### Code block styles
+
+Custom highlighting inside code blocks is a bit more cubersome, but then You can achieve exactly what You wanted to show with inline HTML tags.
+
+<pre>
+<code>>>> <b>l</b> = [i for i in range(<b style="color:darkorange">1,8</b>)]
+>>> <b>l</b>
+[<b style="color:darkorange">1</b>, <b style="color:crimson;font-style: italic;">2</b>, 3, <b style="color:crimson;font-style: italic;">4</b>, 5, <b style="color:crimson;font-style: italic;">6</b>, <b style="color:darkorange">7</b>]
+>>> [<b style="color:cadetblue">a**2</b> for <b style="color:cadetblue">a</b> in <b>l</b> if <b style="color:cadetblue">a%2</b> == 0]
+[<b style="color:crimson;font-style: italic;">4, 16, 36</b>]</code>
+</pre>
+
+HTML code block definition:
+```
+<pre>
+<code>[...]
+[...]
+[...]</code>
+</pre>
 ```
 
 
@@ -411,7 +522,28 @@ Keyword `sepia`
 </div>
 
 ---
+<!--
+_footer: 'P.S. Emoji [usage](https://github.com/marp-team/marp-core#emoji-object) and [list](https://www.w3schools.com/charsets/ref_emoji_smileys.asp)'
+-->
+<style>
+    .center-50 {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 40%;
+    }
+</style>
 ### HTML img tag
+
+<img src="./img/marp_logo.png" alt="Marp logo" class="center-50">
+Including and positioning the image can also be done this way:
+
+```html
+<img src="./img/marp_logo.png" alt="Marp logo" class="center-50">
+```
+
+As long as You are happy with results &#129395;
+
 
 ---
 ## Miscellaneous
@@ -434,6 +566,7 @@ $$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$
 ---
 ### draw.io iframes
 
+<iframe frameborder="0" style="width:100%;height:500px;" src="https://viewer.diagrams.net/?target=blank&highlight=000000&edit=_blank&layers=1&nav=1&title=iframed.drawio#R%3Cmxfile%3E%3Cdiagram%20id%3D%229brZlhAk52aBHjXjjJcK%22%20name%3D%22GHP%22%3E7Vjfd5owFP5rfCwHiCA%2BVqvtzml3POvO1u0tQoS0gbAQFPfXL4HwS7S1tnZ2nQ%2BSfPfmJrn3uzeBHhiH2SWDcXBDPUR6pu5lPXDRM01DNxzxkMi6QGxLAT7DnlKqgVv8G5UjFZpiDyUtRU4p4Thugy6NIuTyFgYZo6u22oKS9qwx9FEHuHUh6aLfsccDhRr2sBZcIewHamrHHBSCEJbKaidJAD26akBg0gNjRikvWmE2RkQ6r%2FRLMW66Q1otjKGI7zNg8vmcedb0%2FmF0N5l8%2B%2BRe%2FgydM7OwsoQkVRvumTYR9kZQwAFDixy1f6VymaOAc%2Bn3czmLOfUxD9K55tJQdJYQRzhNPNEMIYvP3ABBnpA8etV40fLl8wuKaTmRGABLXHmKr0v3M5pGHpI7MIR4FWCObmPoSulKEC5fUkiUeEEjrhgk3TtaYELGlFCW2wLT%2FCdwn0EPC6%2BVsohGqAFfYCaYhGkkRAlNZRjVwpaIcZTt9L9RRVWkA6Ih4mwtVNQAR%2FFAJYJR8mLVoFWJBQ1GmX0FQkVlvzJdR1t6vQj4M4JvdYI%2FyWLKeJ5j4u%2Fq6811JyLIE%2FmhukI3oD6NIJnU6KiOmS56tc41pbGK1D3ifK1CBVMx2a44GmblfDnx464X66Qpc9EjWwaqhEDmI%2F6IXn97KBkikONlex2vHhfwNkk5nRM6zyU4Eo%2BGTAvF8qYxkQIZkk7%2BbugeM5ONwcllMrAPTGXnWJncfwljSpJoijqYbqdLlwZYRDTT8rh9cApUof1rFLA7FLjllKFTqN%2FCp2x9J3uanscyB37ICTQHgBK4yNSURW%2Fd7M0Qw8JPiJVghvldo10Ys1SvtiQ7paFXPEb6ex4j5guPETV0RnHEa%2FKZwx3kK00U61ejmlfCDUNg09Bww1CxwY6hnKDVfg7n7OA9cLbNV8MevEO%2B7nvtOQ5fAWjTrOo%2Fl6%2BipGo6GNY%2Fu23XHGpDoyt%2BIzY7HTZf5geqwGbiLTH5l89Du%2F%2F0lch505ebYScas3ROcBKcVHXR29XFeqq2qDJinPax5xynjAxeq4xYp1xGyi9fx77MA9Pu3uivcfRQvv7zACeSFXLIR7vfO%2Fqp1TPD2EKL%2F5XswErm7FnJDH07TV5YygYbx6VpHVjKbOsJQwcXK9Gtv00X6vUXfjD5Aw%3D%3D%3C%2Fdiagram%3E%3Cdiagram%20id%3D%22BuoVyZletQr1XXtBxu0g%22%20name%3D%22IFrame%22%3E7VjbctowEP0aP4bxlZDHcgttk05myEzCo7CFrVa2qCzA9Osr2ytfkAkkzTRpprxgHWlX2j1ndmUbzijOrjlaR7cswNSwzSAznLFh25ZpDeRfjuxLpO8BEHISwKIamJNfWFkCuiEBTlsLBWNUkHUb9FmSYF%2B0MMQ527WXrRht77pGIdaAuY%2Bojj6QQESAWv2remKGSRjB1gP7spyIkVoMkaQRCtiuATkTwxlxxkT5FGcjTPPkqbyUdtMjs9XBOE7EOQZjC81%2BfhWuwyb324Ubfn9Y2BfgZYvoBgIeExRyFMOZxV4lgrNNEuDcl2U4w11EBJ6vkZ%2FP7iT1EotETGF6xRIBXOaBDleE0hGjjBe%2BnGnxk7jcKSDy%2FGouYQluwGPCJaeEJXIqZZs8oUM4MOYCZ0czYVX5lcLELMaC7%2BUSMBgAIyBJSzG0axCssKjBre0CiEBUYeW6zrt8gNQ%2FgwZbo2FKZOJt88Kw%2ByjOsxuKInhzEi8lC10zn6eSN%2FyRiXPsd8ecozEHBB2wgJPgU16O5MinKE2J3058zZLZpsHKacAZEY%2BwMn9e5Ot6HozGGZgVg70aJDK%2Bx%2BagYZUPa7NipOzKo%2BNAq4sHLMnw2Ib7%2BInkqIKNeIjFKfnrrDdY9TpIVRjHFAmybR%2B3i2jY4Y4RGUglKveqLSrHOdBKGSZYNQvsgSPPbTuq6oxyVOZBc1Torgr75VJ0NSmO2Hr%2FX4mNAntSid5bKrG69CgBea%2BlxP7fVaKnKVE2K5q3qSWXT9CwoH0VOFmVvavd0g5ter3eKUfyvMrXx%2B2DXv8t%2B%2BBoEifD%2B%2Bv49tvsB7%2B%2BWWyzL7OOi%2BScypv7R2ZhYL47FvR75B1Khc7CH%2FaAF9bzl%2FSOV%2BwBnt4Djkv5rXrApXmidJ%2FdAy5PNJPX6wGdWdQvxjiTdbp4q6Foj7lOJBxwS1KyVEp9%2Bp22c2f9HnQfkVQiNzlbS5YVe%2BDdv12bjif97PdeV69XA7erXpnPr1dyWH%2FaKDVVfyByJr8B%3C%2Fdiagram%3E%3C%2Fmxfile%3E"></iframe>
 
 ---
 ### Presenter mode and comments
@@ -465,6 +598,7 @@ You can have multiple comments:
 - Inline SVG
 - Using other (not built-in) themes
 - Developing themes
+- Transitions
 
 ---
 
@@ -490,5 +624,7 @@ You can have multiple comments:
 - [Center content horizontally](https://stackoverflow.com/questions/47216198/get-marp-to-center-some-content-horizontally-and-vertically)
 - [Styling code blocks](https://stackoverflow.com/questions/67012975/how-do-i-style-my-code-blocks-in-a-marp-presentation)
 - [How to create full slide size stretched three columns in Marp/Marpit](https://stackoverflow.com/questions/69692460/how-to-create-full-slide-size-stretched-three-columns-in-marp-marpit)
-- [Footer link examples](https://stackoverflow.com/questions/62510648/add-internal-links-to-a-marp-presentation)
+- [Footnote link examples](https://stackoverflow.com/questions/62510648/add-internal-links-to-a-marp-presentation)
 - [Directive backgroundImage usage](https://github.com/orgs/marp-team/discussions/67)
+- [Naming CSS sections](https://stackoverflow.com/questions/45926475/naming-html-section-ids)
+- [Image and text above it](https://stackoverflow.com/questions/69154809/how-to-align-image-below-text-header-in-marp-or-marpit)
