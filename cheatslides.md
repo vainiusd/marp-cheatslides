@@ -42,6 +42,7 @@ style: |
 - VS Code integration
 - Slide file structure
 - Examples
+- Not covered topics
 - Reference links
 </div>
 <div>
@@ -160,6 +161,7 @@ backgroundColor:
 ![](./img/vscode_enable_html.png)
 
 ---
+## Examples
 ### Headers & Footers
 <!-- 
 header: "Header *text* supports some **markdown** styling, images and hyperlinks"
@@ -268,7 +270,7 @@ Markdown and <a href="https://marp.app/"> HTML syntax links </a> work too.
 _backgroundColor: black
 _color: white
 -->
-## Slide styles
+### Slide styles
 <style scoped>
 a:link {
   color: hotpink;
@@ -337,7 +339,6 @@ _class: slide_styles
       padding-left: 80px;
     }
 </style>
-
 ### Slide styles
 
 #### Directive 'class' usage
@@ -546,7 +547,7 @@ As long as You are happy with results &#129395;
 
 
 ---
-## Miscellaneous
+### Miscellaneous
 
 - [Math](#math-formulas)
 - [draw.io](#drawio-iframes)
