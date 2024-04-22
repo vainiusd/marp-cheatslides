@@ -144,11 +144,6 @@ backgroundImage: url('./img/custom_background.png')
 -->
 ```
 
-<!--
-backgroundColor: 
-
--->
-
 ---
 
 ## Slide syntax
